@@ -26,11 +26,6 @@ export default function World1Task4InstructionsScreen() {
   const bgUrl = `${process.env.PUBLIC_URL}/world1/task4/bg.png`;
   const bgStyle = useMemo(() => ({ "--bg": `url(${bgUrl})` }), [bgUrl]);
 
-  // ✅ Icons for instructions
-  const iconProblem = `${process.env.PUBLIC_URL}/world1/task1/wrong.png`;
-  const iconStep = `${process.env.PUBLIC_URL}/world1/task1/why.png`;
-  const iconValue = `${process.env.PUBLIC_URL}/world1/task1/points.png`;
-
   const femaleSrc = `${process.env.PUBLIC_URL}/characters/female.png`;
   const maleSrc = `${process.env.PUBLIC_URL}/characters/male.png`;
   const characterSrc = player.character === "male" ? maleSrc : femaleSrc;
@@ -51,17 +46,27 @@ export default function World1Task4InstructionsScreen() {
 
           <div className={styles.rows}>
             <div className={styles.row}>
-              <div className={styles.rowText}>1. WHAT’S THE DEMOCRATIC PROBLEM?</div>
+              <div className={styles.rowText}>
+                1. WHAT’S THE DEMOCRATIC PROBLEM?
+              </div>
             </div>
             <div className={styles.row}>
-              <div className={styles.rowText}>2. WHAT’S THE BEST FIRST STEP?</div>
+              <div className={styles.rowText}>
+                2. WHAT’S THE BEST FIRST STEP?
+              </div>
             </div>
             <div className={styles.row}>
-              <div className={styles.rowText}>3. WHICH VALUE IS INVOLVED? (CHOOSE 1 OF 4)</div>
+              <div className={styles.rowText}>
+                3. WHICH VALUE IS INVOLVED? (CHOOSE 1 OF 4)
+              </div>
             </div>
           </div>
 
-          <button type="button" className={styles.actionBtn} onClick={handleStart}>
+          <button
+            type="button"
+            className={styles.actionBtn}
+            onClick={handleStart}
+          >
             START
           </button>
         </div>
