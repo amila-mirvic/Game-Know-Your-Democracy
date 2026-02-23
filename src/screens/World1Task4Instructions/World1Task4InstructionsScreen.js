@@ -51,15 +51,12 @@ export default function World1Task4InstructionsScreen() {
 
           <div className={styles.rows}>
             <div className={styles.row}>
-              <img src={iconProblem} alt="" className={styles.icon} aria-hidden="true" />
               <div className={styles.rowText}>1. WHAT’S THE DEMOCRATIC PROBLEM?</div>
             </div>
             <div className={styles.row}>
-              <img src={iconStep} alt="" className={styles.icon} aria-hidden="true" />
               <div className={styles.rowText}>2. WHAT’S THE BEST FIRST STEP?</div>
             </div>
             <div className={styles.row}>
-              <img src={iconValue} alt="" className={styles.icon} aria-hidden="true" />
               <div className={styles.rowText}>3. WHICH VALUE IS INVOLVED? (CHOOSE 1 OF 4)</div>
             </div>
           </div>
