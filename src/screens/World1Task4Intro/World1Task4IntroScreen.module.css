@@ -1,0 +1,68 @@
+.screen {
+  width: 100%;
+  height: 100vh;
+  background-image: var(--bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+/* ✅ Base Mobile Styles */
+.quoteWrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 600px;
+  display: grid;
+  place-items: center;
+  opacity: 1;
+  transition: opacity 650ms ease;
+  z-index: 10;
+}
+
+.fadeOut { opacity: 0; pointer-events: none; }
+
+.quoteText {
+  font-family: "Tomorrow", sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  white-space: pre-line;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* ✅ Desktop Overrides (1025px+) */
+@media (min-width: 1025px) {
+  .quoteWrap {
+    top: auto;
+    bottom: 110px;
+    transform: translateX(-50%);
+    width: min(1200px, calc(100% - 120px));
+  }
+  .quoteText { font-size: 28px; text-shadow: 0 10px 28px rgba(0, 0, 0, 0.55); }
+}
+
+.caret {
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+  margin-left: 8px;
+  background: rgba(255, 255, 255, 0.75);
+  animation: caretBlink 700ms steps(1) infinite;
+}
+
+@keyframes caretBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }

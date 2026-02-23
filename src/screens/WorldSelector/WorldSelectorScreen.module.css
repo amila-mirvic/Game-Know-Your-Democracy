@@ -1,0 +1,221 @@
+.screen {
+  width: 100%; height: 100%;
+  background-image: var(--bg); background-size: cover; background-position: center; background-repeat: no-repeat;
+  position: relative; overflow: hidden;
+}
+
+.overlay {
+  width: 100%; height: 100%;
+  position: relative; display: flex; flex-direction: column; align-items: center;
+  padding: 10px 15px; box-sizing: border-box;
+}
+
+/* ✅ Mobile First */
+.title {
+  margin: 5px 0; font-size: 16px; letter-spacing: 1px;
+  color: #fff; font-weight: 800; text-transform: uppercase;
+  font-family: "Tomorrow", sans-serif;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8); text-align: center;
+  flex-shrink: 0;
+}
+
+/* ✅ Redesigned for Mobile - Smaller, more vertical */
+.worldCard {
+  position: relative; width: 95%; max-width: 360px;
+  border-radius: 20px; background: rgba(202, 88, 64, 0.85);
+  backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 12px; display: flex; flex-direction: column; gap: 6px;
+  z-index: 10; height: 220px; /* ✅ Significantly smaller */
+  flex: none; overflow: hidden;
+  justify-content: space-between;
+}
+
+.worldLeft {
+  display: flex; flex-direction: column; gap: 4px; flex-shrink: 0;
+}
+
+.worldImageWrap { width: 100%; height: 60px; border-radius: 10px; overflow: hidden; flex-shrink: 0; }
+.worldImage { width: 100%; height: 100%; object-fit: cover; }
+.worldLabel { font-size: 14px; font-weight: 800; color: #fff; font-family: "Tomorrow", sans-serif; text-align: center; margin-top: 2px; }
+
+.worldRight {
+  display: flex; flex-direction: column; gap: 4px; flex: 1; min-height: 0; overflow: hidden;
+}
+
+.worldDesc {
+  margin: 0; color: #fff; font-size: 10px; line-height: 1.25;
+  font-family: "Tomorrow", sans-serif; text-align: center;
+  flex: 1; min-height: 0; overflow-y: visible;
+  padding: 0 5px;
+}
+
+.playBtn {
+  width: 100%; height: 40px;
+  border-radius: 10px; background: #ffffff;
+  font-size: 16px; font-weight: 700; color: #ca5840;
+  cursor: pointer; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  border: none; margin-top: 4px; flex-shrink: 0;
+}
+
+.skipLink {
+  position: fixed; top: 10px; right: 15px;
+  font-family: "Tomorrow", sans-serif; font-size: 11px; font-weight: 800;
+  color: #fff; z-index: 100; opacity: 0.8;
+  background: transparent; border: none; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 4px;
+}
+.skipLink:hover { opacity: 1; }
+
+/* Coming soon bar */
+.comingSoonBar {
+  width: 100%; padding: 8px;
+  background: rgba(0, 0, 0, 0.35); border-radius: 12px;
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  margin-top: 8px; flex-shrink: 0;
+}
+.comingSoonInner { display: flex; justify-content: center; align-items: center; gap: 8px; width: 100%; }
+.lockCard { width: 40px; height: 32px; border-radius: 6px; background: rgba(202, 88, 64, 1); display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; flex-shrink: 0; }
+.lockIcon { width: 14px; filter: brightness(0) invert(1); }
+.comingSoonText { font-size: 10px; color: #fff; font-family: "Tomorrow", sans-serif; text-transform: uppercase; white-space: nowrap; }
+
+.playerCrop { display: none; }
+
+/* Tablet */
+@media (min-width: 768px) {
+  .title { font-size: 22px; margin: 10px 0; }
+  .worldCard { max-width: 450px; padding: 20px; gap: 12px; height: 400px; }
+  .worldImageWrap { height: 140px; }
+  .worldLabel { font-size: 20px; }
+  .worldDesc { font-size: 13px; }
+  .playBtn { height: 50px; font-size: 20px; }
+  .lockCard { width: 60px; height: 48px; }
+  .lockIcon { width: 20px; }
+  .comingSoonText { font-size: 14px; }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  .overlay { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 0; 
+  }
+
+  .title { 
+    position: absolute; 
+    left: 80px; 
+    top: 60px; 
+    font-size: 40px; 
+    margin: 0; 
+    text-align: left; 
+    z-index: 20;
+  }
+
+  .worldCard {
+    position: relative; 
+    left: -150px; 
+    top: auto; 
+    width: 960px; 
+    height: auto;
+    min-height: 480px;
+    max-width: none; 
+    display: grid; 
+    grid-template-columns: 420px 1fr; 
+    gap: 40px;
+    padding: 50px; 
+    padding-bottom: 120px;
+    margin-right: 0; 
+    text-align: left; 
+    flex: none; 
+    overflow: visible;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+  }
+
+  .worldLeft { flex-shrink: 0; width: 420px; gap: 15px; }
+  .worldImageWrap { height: 280px; border-radius: 16px; }
+  .worldLabel { font-size: 32px; text-align: left; margin-top: 5px; }
+  
+  .worldRight { overflow: visible; justify-content: flex-start; }
+  .worldDesc { 
+    font-size: 17px; 
+    text-align: left; 
+    overflow: visible; 
+    padding-right: 0; 
+    line-height: 1.6;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .playBtn { 
+    position: absolute; 
+    left: 50%; 
+    bottom: -40px; 
+    transform: translateX(-50%); 
+    width: 420px; 
+    height: 86px; 
+    font-size: 30px; 
+    margin: 0; 
+    z-index: 50;
+  }
+
+  .skipLink { 
+    position: absolute; 
+    top: 40px; 
+    right: 40px; 
+    font-size: 20px; 
+    z-index: 100;
+    text-shadow: none;
+    opacity: 0.8;
+  }
+  .skipLink:hover { opacity: 1; }
+
+  .comingSoonBar { 
+    position: absolute; 
+    bottom: -180px; /* Position below card */
+    left: 0; 
+    right: 0; 
+    height: 140px; 
+    flex-direction: row; 
+    padding: 0 40px; 
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    margin-top: 0; 
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .comingSoonInner { 
+    padding: 0; 
+    width: 100%; 
+    gap: 25px; 
+    justify-content: flex-start;
+  }
+
+  .lockCard { 
+    width: 120px; 
+    height: 100px; 
+    border-radius: 14px; 
+  }
+
+  .lockIcon { width: 34px; }
+  .comingSoonText { font-size: 20px; }
+
+  .playerCrop { 
+    display: block; 
+    position: absolute; 
+    right: 0; 
+    bottom: -60px; 
+    height: 105vh; 
+    pointer-events: none; 
+    overflow: hidden; 
+    z-index: 5;
+    transform: translateX(10%);
+  }
+  .playerImg { height: 100%; display: block; width: auto; object-fit: contain; }
+}
+
+.caret { display: inline-block; width: 8px; height: 14px; margin-left: 4px; vertical-align: -2px; background: rgba(0, 0, 0, 0.35); animation: caretBlink 700ms steps(1) infinite; }
+@keyframes caretBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes lockShake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
+.lockShake { animation: lockShake 420ms ease; }
