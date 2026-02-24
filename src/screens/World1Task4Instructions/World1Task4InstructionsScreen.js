@@ -46,27 +46,17 @@ export default function World1Task4InstructionsScreen() {
 
           <div className={styles.rows}>
             <div className={styles.row}>
-              <div className={styles.rowText}>
-                1. WHAT’S THE DEMOCRATIC PROBLEM?
-              </div>
+              <div className={styles.rowText}>1. WHAT’S THE DEMOCRATIC PROBLEM?</div>
             </div>
             <div className={styles.row}>
-              <div className={styles.rowText}>
-                2. WHAT’S THE BEST FIRST STEP?
-              </div>
+              <div className={styles.rowText}>2. WHAT’S THE BEST FIRST STEP?</div>
             </div>
             <div className={styles.row}>
-              <div className={styles.rowText}>
-                3. WHICH VALUE IS INVOLVED? (CHOOSE 1 OF 4)
-              </div>
+              <div className={styles.rowText}>3. WHICH VALUE IS INVOLVED? (CHOOSE 1 OF 4)</div>
             </div>
           </div>
 
-          <button
-            type="button"
-            className={styles.actionBtn}
-            onClick={handleStart}
-          >
+          <button type="button" className={styles.actionBtn} onClick={handleStart}>
             START
           </button>
         </div>
