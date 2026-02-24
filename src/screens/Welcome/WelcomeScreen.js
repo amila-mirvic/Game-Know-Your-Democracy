@@ -12,8 +12,6 @@ export default function WelcomeScreen() {
         <div className={styles.heroCard}>
           <img src="/logo.png" alt="Your Democracy" className={styles.logo} />
 
-    
-
           <button
             className={styles.playBtn}
             onClick={() => navigate("/setup")}

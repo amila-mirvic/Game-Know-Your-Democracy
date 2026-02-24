@@ -31,8 +31,14 @@
 }
 
 @keyframes cardIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .logo {
@@ -44,8 +50,13 @@
 }
 
 @keyframes logoGlow {
-  0%, 100% { filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0)); }
-  50% { filter: drop-shadow(0 8px 20px rgba(255, 255, 255, 0.3)); }
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+  }
+  50% {
+    filter: drop-shadow(0 8px 20px rgba(255, 255, 255, 0.3));
+  }
 }
 
 .playBtn {
@@ -81,8 +92,13 @@
     padding: 40px 30px;
     margin-top: -15vh;
   }
-  .logo { max-width: 280px; }
-  .playBtn { height: 74px; font-size: 26px; }
+  .logo {
+    max-width: 280px;
+  }
+  .playBtn {
+    height: 74px;
+    font-size: 26px;
+  }
 }
 
 /* Desktop Only (1025px+) */
@@ -97,7 +113,8 @@
 
   .heroCard {
     position: relative;
-    left: -150px; /* Move box further left */
+    /* Move the red box more to the left on desktop/laptop */
+    left: clamp(-260px, -18vw, -150px);
     top: auto;
     width: 760px;
     height: auto;
@@ -107,12 +124,16 @@
     padding: 50px;
     gap: 15px;
     margin-top: 0;
-    margin-right: 0; 
+    margin-right: 0;
     justify-content: center;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
   }
 
-  .logo { width: 420px; max-width: none; margin-bottom: 20px; }
+  .logo {
+    width: 420px;
+    max-width: none;
+    margin-bottom: 20px;
+  }
 
   .playBtn {
     position: absolute;
@@ -128,35 +149,74 @@
     text-transform: uppercase;
   }
 
-  .playBtn:hover { transform: translateX(-50%) scale(1.05); }
-  
+  .playBtn:hover {
+    transform: translateX(-50%) scale(1.05);
+  }
+
   /* ✅ Visible on desktop only */
   .characters {
     display: block;
     position: absolute;
     right: 0; /* Align to right */
-    bottom: -50px;
+    /* Pin to bottom across desktop/laptop */
+    bottom: 0;
     width: auto;
-    height: 105vh; /* Slightly taller */
+    /* Slightly bigger on desktop */
+    height: 112vh;
     max-width: none;
     margin: 0;
-    transform: translateX(10%); /* Peek from the right */
-    pointer-events: none; user-select: none;
+    transform: translate3d(8%, 0, 0); /* Peek from the right */
+    pointer-events: none;
+    user-select: none;
     animation: floatYDesktop 4.5s ease-in-out infinite;
     z-index: 5;
   }
+
   @keyframes floatYDesktop {
-    0%, 100% { transform: translateY(10px); }
-    50% { transform: translateY(0px); }
+    /* Keep the X offset while animating Y (otherwise it jumps) */
+    0%,
+    100% {
+      transform: translate3d(8%, 10px, 0);
+    }
+    50% {
+      transform: translate3d(8%, 0px, 0);
+    }
   }
 }
 
 /* Landscape fix for phones */
 @media (max-height: 450px) and (orientation: landscape) {
-  .wrapper { flex-direction: row; padding: 10px; }
-  .heroCard { margin-top: 0; width: 50%; padding: 15px; gap: 10px; }
-  .logo { max-width: 140px; }
-  .playBtn { height: 44px; font-size: 16px; }
-  .characters { position: relative; bottom: 0; transform: none; width: 40%; margin: 0; }
-  @keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+  .wrapper {
+    flex-direction: row;
+    padding: 10px;
+  }
+  .heroCard {
+    margin-top: 0;
+    width: 50%;
+    padding: 15px;
+    gap: 10px;
+  }
+  .logo {
+    max-width: 140px;
+  }
+  .playBtn {
+    height: 44px;
+    font-size: 16px;
+  }
+  .characters {
+    position: relative;
+    bottom: 0;
+    transform: none;
+    width: 40%;
+    margin: 0;
+  }
+  @keyframes floatY {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
 }
