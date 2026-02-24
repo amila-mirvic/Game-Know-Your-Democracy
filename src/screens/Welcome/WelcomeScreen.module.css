@@ -27,7 +27,7 @@
   gap: 20px;
   z-index: 10;
   animation: cardIn 550ms ease-out both;
-  margin-top: -10vh; /* Shift up to make room for characters */
+  margin-top: -10vh;
 }
 
 @keyframes cardIn {
@@ -103,32 +103,30 @@
 
 /* ✅ Desktop Only (1025px+) */
 @media (min-width: 1025px) {
-  /* 🔥 KLJUČ: wrapper više NE smije rezati */
+  /* ✅ NO SCROLL on desktop */
   .wrapper {
     display: block;
-    overflow: visible; /* ✅ ne siječe dugme/elemente */
+    overflow: hidden; /* 🔥 bitno: nema scrolla */
   }
 
-  /* ✅ box se stvarno pomjeri lijevo (absolute) */
+  /* ✅ box stvarno lijevo */
   .heroCard {
     position: absolute;
     left: clamp(60px, 8vw, 220px);
     top: 50%;
     transform: translateY(-50%);
-
     width: 760px;
     max-width: none;
     min-height: 480px;
 
     border-radius: 32px;
     padding: 55px;
-    padding-bottom: 140px; /* ✅ prostor za START dugme unutar kartice */
+    padding-bottom: 140px; /* prostor za dugme */
     gap: 15px;
-    margin-top: 0;
-    margin-right: 0;
-    justify-content: center;
+    margin: 0;
 
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden; /* ok jer je dugme UNUTRA */
   }
 
   .logo {
@@ -137,17 +135,17 @@
     margin-bottom: 20px;
   }
 
-  /* ✅ dugme unutar kartice (nema bottom:-40) */
+  /* ✅ dugme unutar kartice */
   .playBtn {
     position: absolute;
     left: 50%;
     bottom: 40px;
     transform: translateX(-50%);
     width: 480px;
+    max-width: none;
     height: 86px;
     font-size: 30px;
     border-radius: 18px;
-    max-width: none;
     z-index: 50;
     text-transform: uppercase;
   }
@@ -156,33 +154,28 @@
     transform: translateX(-50%) scale(1.05);
   }
 
-  /* ✅ Characters: bottom-fixed + mrvu veći */
+  /* ✅ Characters: truly bottom-attached (PNG has bottom padding -> push down) */
   .characters {
     display: block;
     position: absolute;
     right: 0;
-    bottom: 0; /* ✅ zakucaj za bottom */
+    bottom: -7vh; /* 🔥 spušta likove dole (nema scrolla jer wrapper hidden) */
     width: auto;
-    height: 112vh; /* ✅ mrvu veći */
+
+    /* malo veći */
+    height: 118vh;
+
     max-width: none;
     margin: 0;
     pointer-events: none;
     user-select: none;
     z-index: 5;
 
+    /* zadrži X offset, bez "dizanja" */
     transform: translate3d(10%, 0, 0);
-    animation: floatYDesktop 4.5s ease-in-out infinite;
-  }
 
-  /* ✅ sačuvaj translateX dok animiraš Y */
-  @keyframes floatYDesktop {
-    0%,
-    100% {
-      transform: translate3d(10%, 10px, 0);
-    }
-    50% {
-      transform: translate3d(10%, 0px, 0);
-    }
+    /* ✅ maknemo float da izgleda "attached" */
+    animation: none;
   }
 }
 
@@ -211,14 +204,5 @@
     transform: none;
     width: 40%;
     margin: 0;
-  }
-  @keyframes floatY {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-5px);
-    }
   }
 }
