@@ -92,39 +92,38 @@
     padding: 40px 30px;
     margin-top: -15vh;
   }
+
   .logo {
     max-width: 280px;
   }
+
   .playBtn {
     height: 74px;
     font-size: 26px;
   }
 }
 
-/* Desktop Only (1025px+) */
+/* ✅ Desktop Only (1025px+) */
 @media (min-width: 1025px) {
+  /* Make positioning deterministic on desktop */
   .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
+    display: block;
     overflow: hidden;
   }
 
+  /* ✅ Move the red box to the left (real move) */
   .heroCard {
-    position: relative;
-    /* Move the red box more to the left on desktop/laptop */
-    left: clamp(-260px, -18vw, -150px);
-    top: auto;
+    position: absolute;
+    left: clamp(60px, 9vw, 220px);
+    top: 50%;
+    transform: translateY(-50%);
     width: 760px;
-    height: auto;
-    min-height: 480px;
     max-width: none;
+    min-height: 480px;
     border-radius: 32px;
-    padding: 50px;
+    padding: 55px;
     gap: 15px;
-    margin-top: 0;
-    margin-right: 0;
+    margin: 0;
     justify-content: center;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
   }
@@ -138,13 +137,13 @@
   .playBtn {
     position: absolute;
     left: 50%;
-    bottom: -40px;
+    bottom: -42px;
     transform: translateX(-50%);
     width: 480px;
+    max-width: none;
     height: 86px;
     font-size: 30px;
     border-radius: 18px;
-    max-width: none;
     z-index: 50;
     text-transform: uppercase;
   }
@@ -153,33 +152,33 @@
     transform: translateX(-50%) scale(1.05);
   }
 
-  /* ✅ Visible on desktop only */
+  /* ✅ Characters pinned to bottom + slightly larger */
   .characters {
     display: block;
     position: absolute;
-    right: 0; /* Align to right */
-    /* Pin to bottom across desktop/laptop */
-    bottom: 0;
+    right: 0;
+    bottom: 0; /* ✅ fixed to bottom */
     width: auto;
-    /* Slightly bigger on desktop */
-    height: 112vh;
+    height: 112vh; /* ✅ a bit bigger */
     max-width: none;
     margin: 0;
-    transform: translate3d(8%, 0, 0); /* Peek from the right */
     pointer-events: none;
     user-select: none;
-    animation: floatYDesktop 4.5s ease-in-out infinite;
     z-index: 5;
+
+    /* Peek from the right, keep this even while animating */
+    transform: translate3d(10%, 0, 0);
+    animation: floatYDesktop 4.5s ease-in-out infinite;
   }
 
+  /* ✅ Preserve translateX while animating Y */
   @keyframes floatYDesktop {
-    /* Keep the X offset while animating Y (otherwise it jumps) */
     0%,
     100% {
-      transform: translate3d(8%, 10px, 0);
+      transform: translate3d(10%, 10px, 0);
     }
     50% {
-      transform: translate3d(8%, 0px, 0);
+      transform: translate3d(10%, 0px, 0);
     }
   }
 }
@@ -190,33 +189,28 @@
     flex-direction: row;
     padding: 10px;
   }
+
   .heroCard {
     margin-top: 0;
     width: 50%;
     padding: 15px;
     gap: 10px;
   }
+
   .logo {
     max-width: 140px;
   }
+
   .playBtn {
     height: 44px;
     font-size: 16px;
   }
+
   .characters {
     position: relative;
     bottom: 0;
     transform: none;
     width: 40%;
     margin: 0;
-  }
-  @keyframes floatY {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-5px);
-    }
   }
 }
