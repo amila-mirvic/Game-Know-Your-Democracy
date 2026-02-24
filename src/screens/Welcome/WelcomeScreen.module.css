@@ -92,11 +92,9 @@
     padding: 40px 30px;
     margin-top: -15vh;
   }
-
   .logo {
     max-width: 280px;
   }
-
   .playBtn {
     height: 74px;
     font-size: 26px;
@@ -105,26 +103,31 @@
 
 /* ✅ Desktop Only (1025px+) */
 @media (min-width: 1025px) {
-  /* Make positioning deterministic on desktop */
+  /* 🔥 KLJUČ: wrapper više NE smije rezati */
   .wrapper {
     display: block;
-    overflow: hidden;
+    overflow: visible; /* ✅ ne siječe dugme/elemente */
   }
 
-  /* ✅ Move the red box to the left (real move) */
+  /* ✅ box se stvarno pomjeri lijevo (absolute) */
   .heroCard {
     position: absolute;
-    left: clamp(60px, 9vw, 220px);
+    left: clamp(60px, 8vw, 220px);
     top: 50%;
     transform: translateY(-50%);
+
     width: 760px;
     max-width: none;
     min-height: 480px;
+
     border-radius: 32px;
     padding: 55px;
+    padding-bottom: 140px; /* ✅ prostor za START dugme unutar kartice */
     gap: 15px;
-    margin: 0;
+    margin-top: 0;
+    margin-right: 0;
     justify-content: center;
+
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
   }
 
@@ -134,16 +137,17 @@
     margin-bottom: 20px;
   }
 
+  /* ✅ dugme unutar kartice (nema bottom:-40) */
   .playBtn {
     position: absolute;
     left: 50%;
-    bottom: -42px;
+    bottom: 40px;
     transform: translateX(-50%);
     width: 480px;
-    max-width: none;
     height: 86px;
     font-size: 30px;
     border-radius: 18px;
+    max-width: none;
     z-index: 50;
     text-transform: uppercase;
   }
@@ -152,26 +156,25 @@
     transform: translateX(-50%) scale(1.05);
   }
 
-  /* ✅ Characters pinned to bottom + slightly larger */
+  /* ✅ Characters: bottom-fixed + mrvu veći */
   .characters {
     display: block;
     position: absolute;
     right: 0;
-    bottom: 0; /* ✅ fixed to bottom */
+    bottom: 0; /* ✅ zakucaj za bottom */
     width: auto;
-    height: 112vh; /* ✅ a bit bigger */
+    height: 112vh; /* ✅ mrvu veći */
     max-width: none;
     margin: 0;
     pointer-events: none;
     user-select: none;
     z-index: 5;
 
-    /* Peek from the right, keep this even while animating */
     transform: translate3d(10%, 0, 0);
     animation: floatYDesktop 4.5s ease-in-out infinite;
   }
 
-  /* ✅ Preserve translateX while animating Y */
+  /* ✅ sačuvaj translateX dok animiraš Y */
   @keyframes floatYDesktop {
     0%,
     100% {
@@ -189,28 +192,33 @@
     flex-direction: row;
     padding: 10px;
   }
-
   .heroCard {
     margin-top: 0;
     width: 50%;
     padding: 15px;
     gap: 10px;
   }
-
   .logo {
     max-width: 140px;
   }
-
   .playBtn {
     height: 44px;
     font-size: 16px;
   }
-
   .characters {
     position: relative;
     bottom: 0;
     transform: none;
     width: 40%;
     margin: 0;
+  }
+  @keyframes floatY {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
   }
 }

@@ -21,7 +21,6 @@ export default function WelcomeScreen() {
           </button>
         </div>
 
-        {/* ✅ jedna slika koja prelazi preko boxa */}
         <img
           src="/characters/both.png"
           className={styles.characters}
