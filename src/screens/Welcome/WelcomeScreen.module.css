@@ -11,156 +11,119 @@
   overflow: hidden;
 }
 
-/* ✅ Mobile First */
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+}
+
 .heroCard {
-  position: relative;
-  width: 85%;
-  max-width: 340px;
-  border-radius: 24px;
-  background: rgba(202, 88, 64, 0.85);
+  width: min(92vw, 520px);
+  background: rgba(202, 88, 64, 0.82);
+  border-radius: 18px;
+  padding: 22px 22px 90px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(10px);
-  box-shadow: 0 15px 45px rgba(202, 88, 64, 0.4);
-  padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  text-align: center;
   z-index: 10;
-  animation: cardIn 550ms ease-out both;
+  position: relative;
   margin-top: -10vh;
 }
 
-@keyframes cardIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .logo {
-  width: 80%;
-  max-width: 220px;
+  width: 120px;
   height: auto;
+  margin: 0 auto 14px;
   display: block;
-  animation: logoGlow 3.2s ease-in-out infinite;
 }
 
-@keyframes logoGlow {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
-  }
-  50% {
-    filter: drop-shadow(0 8px 20px rgba(255, 255, 255, 0.3));
-  }
+.subtitle {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-family: "Tomorrow", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+}
+
+.title {
+  margin: 6px 0 0;
+  color: #fff;
+  font-family: "Tomorrow", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 22px;
+  letter-spacing: 1px;
 }
 
 .playBtn {
-  position: relative;
-  width: 100%;
-  max-width: 240px;
+  position: absolute;
+  left: 50%;
+  bottom: -28px;
+  transform: translateX(-50%);
+  width: min(78vw, 320px);
   height: 60px;
-  border-radius: 16px;
+  border-radius: 10px;
   border: none;
-  background: #ffffff;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 2px;
+  background: #fff;
   color: #ca5840;
+  font-family: "Tomorrow", sans-serif;
+  font-weight: 800;
+  font-size: 22px;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
 }
 
-.playBtn:active {
-  transform: scale(0.95);
-}
-
-/* ✅ Hidden on mobile/tablet strictly */
 .characters {
-  display: none;
+  width: min(95vw, 760px);
+  height: auto;
+  max-width: 90%;
+  margin-top: 18px;
+  z-index: 5;
 }
 
-/* Tablet */
-@media (min-width: 768px) {
-  .heroCard {
-    max-width: 450px;
-    padding: 40px 30px;
-    margin-top: -15vh;
-  }
-  .logo {
-    max-width: 280px;
-  }
-  .playBtn {
-    height: 74px;
-    font-size: 26px;
-  }
-}
-
-/* ✅ Desktop Only (avoid tablets / large phones) */
-@media (min-width: 1200px) {
-  /* ✅ NO SCROLL on desktop */
+/* Desktop */
+@media (min-width: 1025px) {
   .wrapper {
     display: block;
-    /*
-      Desktop renders inside GameLayout's fixed 1920x1080 stage.
-      If we keep the mobile vh-based height here, the wrapper can become
-      shorter than the stage and clip the card + PLAY button.
-    */
     height: 100%;
-    overflow: hidden; /* 🔥 bitno: nema scrolla */
+    overflow: hidden;
   }
 
-  /* ✅ box stvarno lijevo */
   .heroCard {
     position: absolute;
-    left: clamp(60px, 8vw, 220px);
+    left: 70px;
     top: 50%;
-    transform: translateY(-50%);
-    width: 760px;
-    max-width: none;
-    min-height: 480px;
-
-    border-radius: 32px;
-    padding: 55px;
-    padding-bottom: 140px; /* prostor za dugme */
-    gap: 15px;
+    transform: translateY(-50%); /* ✅ box centered vertically */
+    width: 620px;
+    padding: 44px 44px 118px;
     margin: 0;
-
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
-    overflow: hidden; /* ok jer je dugme UNUTRA */
+    text-align: center;
   }
 
   .logo {
-    width: 420px;
-    max-width: none;
-    margin-bottom: 20px;
+    width: 170px;
+    margin-bottom: 18px;
   }
 
-  /* ✅ dugme unutar kartice */
+  .title {
+    font-size: 34px;
+    letter-spacing: 1.5px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
   .playBtn {
-    position: absolute;
-    left: 50%;
-    bottom: 40px;
-    transform: translateX(-50%);
-    width: 480px;
-    max-width: none;
-    height: 86px;
+    width: 420px;
+    height: 80px;
     font-size: 30px;
-    border-radius: 18px;
-    z-index: 50;
-    text-transform: uppercase;
+    bottom: -40px;
   }
 
-  .playBtn:hover {
-    transform: translateX(-50%) scale(1.05);
-  }
-
-  /* ✅ Characters: truly bottom-attached (PNG has bottom padding -> push down) */
   .characters {
     display: block;
     position: absolute;
@@ -177,38 +140,6 @@
     user-select: none;
     z-index: 5;
 
-    /* zadrži X offset, bez "dizanja" */
     transform: translate3d(10%, 0, 0);
-
-    /* ✅ maknemo float da izgleda "attached" */
-    animation: none;
-  }
-}
-
-/* Landscape fix for phones */
-@media (max-height: 450px) and (orientation: landscape) {
-  .wrapper {
-    flex-direction: row;
-    padding: 10px;
-  }
-  .heroCard {
-    margin-top: 0;
-    width: 50%;
-    padding: 15px;
-    gap: 10px;
-  }
-  .logo {
-    max-width: 140px;
-  }
-  .playBtn {
-    height: 44px;
-    font-size: 16px;
-  }
-  .characters {
-    position: relative;
-    bottom: 0;
-    transform: none;
-    width: 40%;
-    margin: 0;
   }
 }
