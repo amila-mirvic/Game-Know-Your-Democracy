@@ -15,13 +15,14 @@
   align-items: center;
   justify-content: flex-start;
   padding: 16px 15px;
+  gap: 14px;
   box-sizing: border-box;
 }
 
 /* ✅ Mobile First */
 .title {
-  margin: 8px 0 12px;
-  font-size: 18px;
+  margin: 8px 0 6px;
+  font-size: 22px;
   letter-spacing: 1px;
   color: #fff;
   font-weight: 800;
@@ -45,7 +46,7 @@
   flex-direction: column;
   gap: 10px;
   z-index: 10;
-  min-height: 360px; /* ✅ enough for full description */
+  min-height: 380px; /* ✅ enough for full description */
   flex: none;
   overflow: hidden;
   justify-content: space-between;
@@ -60,7 +61,7 @@
 
 .worldImageWrap {
   width: 100%;
-  height: 92px;
+  height: 110px;
   border-radius: 12px;
   overflow: hidden;
   flex-shrink: 0;
@@ -93,8 +94,8 @@
   min-height: 0;
   overflow-y: visible;
   padding: 0 5px;
-  font-size: 12px;
-  line-height: 1.35;
+  font-size: 13px;
+  line-height: 1.45;
 }
 
 .playBtn {
@@ -140,7 +141,7 @@
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  margin-top: 14px;
+  margin-top: auto; /* ✅ pushes bar to bottom on mobile to remove empty space */
   flex-shrink: 0;
 }
 
@@ -148,7 +149,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   width: 100%;
 }
 
@@ -169,7 +170,7 @@
 .lockIcon { width: 14px; filter: brightness(0) invert(1); }
 
 .comingSoonText {
-  font-size: 12px;
+  font-size: 13px;
   color: #fff;
   font-family: "Tomorrow", sans-serif;
   text-transform: uppercase;
@@ -180,15 +181,15 @@
 
 /* Tablet */
 @media (min-width: 768px) {
-  .title { font-size: 22px; margin: 10px 0; }
-  .worldCard { max-width: 450px; padding: 20px; gap: 12px; height: 400px; }
+  .title { font-size: 26px; margin: 14px 0 10px; }
+  .worldCard { max-width: 520px; padding: 22px; gap: 14px; height: 440px; }
   .worldImageWrap { height: 140px; }
   .worldLabel { font-size: 20px; }
-  .worldDesc { font-size: 13px; }
+  .worldDesc { font-size: 14px; line-height: 1.5; }
   .playBtn { height: 50px; font-size: 20px; }
   .lockCard { width: 60px; height: 48px; }
   .lockIcon { width: 20px; }
-  .comingSoonText { font-size: 14px; }
+  .comingSoonText { font-size: 15px; }
 }
 
 /* Desktop */
@@ -196,14 +197,15 @@
   .overlay {
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 60px 80px;
+    padding: 54px 80px;
+    gap: 22px;
   }
 
   .title {
     position: relative;
     left: 0;
     top: 0;
-    font-size: 40px;
+    font-size: clamp(28px, 3vw, 40px);
     margin: 0 0 26px;
     text-align: left;
     z-index: 20;
@@ -214,15 +216,15 @@
     position: relative;
     left: 0;
     top: 0;
-    width: 980px;
+    width: 940px;
     height: auto;
-    min-height: 520px;
+    min-height: 480px;
     max-width: none;
     display: grid;
     grid-template-columns: 420px 1fr;
-    gap: 40px;
-    padding: 50px;
-    padding-bottom: 120px;
+    gap: 36px;
+    padding: 46px;
+    padding-bottom: 108px;
     margin-right: 0;
     text-align: left;
     flex: none;
@@ -234,7 +236,7 @@
   .worldImageWrap { height: 280px; border-radius: 16px; }
   .worldLabel { font-size: 32px; text-align: left; margin-top: 5px; }
 
-  .worldRight { overflow: visible; justify-content: flex-start; }
+  .worldRight { overflow: visible; justify-content: flex-start; position: relative; padding-top: 34px; }
   .worldDesc {
     font-size: 16px;
     text-align: left;
@@ -259,25 +261,25 @@
 
   .skipLink {
     position: absolute;
-    top: 40px;
-    right: 40px;
-    font-size: 20px;
+    top: 0;
+    right: 0;
+    font-size: 18px;
     z-index: 100;
     text-shadow: none;
-    opacity: 0.8;
+    opacity: 0.85;
   }
   .skipLink:hover { opacity: 1; }
 
   .comingSoonBar {
     position: relative;
-    width: 980px;
+    width: 940px;
     max-width: none;
     height: 140px;
     flex-direction: row;
     padding: 0 40px;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 20px;
-    margin-top: 22px;
+    margin-top: 18px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
@@ -297,12 +299,13 @@
     display: block;
     position: absolute;
     right: 0;
-    bottom: -40px;
-    height: 105vh;
+    top: 50%;
+    bottom: auto;
+    height: min(92vh, 980px);
     pointer-events: none;
     overflow: hidden;
     z-index: 5;
-    transform: translateX(6%);
+    transform: translate(6%, -50%);
   }
   .playerImg { height: 100%; display: block; width: auto; object-fit: contain; }
 }
