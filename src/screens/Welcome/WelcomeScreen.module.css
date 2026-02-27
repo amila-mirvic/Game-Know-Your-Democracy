@@ -106,6 +106,12 @@
   /* ✅ NO SCROLL on desktop */
   .wrapper {
     display: block;
+    /*
+      Desktop renders inside GameLayout's fixed 1920x1080 stage.
+      If we keep the mobile vh-based height here, the wrapper can become
+      shorter than the stage and clip the card + PLAY button.
+    */
+    height: 100%;
     overflow: hidden; /* 🔥 bitno: nema scrolla */
   }
 

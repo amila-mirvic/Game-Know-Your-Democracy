@@ -1,5 +1,6 @@
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import GameLayout from "../../components/Layout/GameLayout";
 import styles from "./SetupScreen.module.css";
 
 export default function SetupScreen() {
@@ -30,12 +31,7 @@ export default function SetupScreen() {
   const AFTER_DESC_DELAY_MS = 650;
   const LABEL_SPEED_MS = 55;
 
-  const bgStyle = useMemo(
-    () => ({
-      backgroundImage: `url(${process.env.PUBLIC_URL}/backgrounds/firstbg2.png)`,
-    }),
-    []
-  );
+  // Background handled by GameLayout (desktop scaling + mobile fluid)
 
   const femaleSrc = `${process.env.PUBLIC_URL}/characters/female.png`;
   const maleSrc = `${process.env.PUBLIC_URL}/characters/male.png`;
@@ -121,128 +117,124 @@ export default function SetupScreen() {
   };
 
   return (
-    <div className={styles.screen} style={bgStyle}>
-      <div className={styles.overlay}>
-        {/* LEFT CARD */}
-        <div className={styles.heroCard}>
-          <div className={styles.descriptionWrap}>
-            <p className={styles.description}>
-              {descText}
-              {!skipTyping && descText.length < fullDescription.length && (
-                <span className={styles.caret} aria-hidden="true" />
-              )}
-            </p>
-          </div>
-
-          {/* ✅ SKIP button below text and before play button */}
-          {!skipTyping && descText.length < fullDescription.length && (
-            <button type="button" className={styles.skipBtn} onClick={handleSkip}>
-              SKIP TYPING
-            </button>
-          )}
-
-          {formVisible && (
-            <div className={styles.formBlock}>
-              <label className={styles.label}>
-                {labelText}
-                {!skipTyping && labelText.length < fullLabel.length && (
+    <GameLayout backgroundImage="/backgrounds/firstbg2.png">
+      <div className={styles.screen}>
+        <div className={styles.overlay}>
+          {/* LEFT CARD */}
+          <div className={styles.heroCard}>
+            <div className={styles.descriptionWrap}>
+              <p className={styles.description}>
+                {descText}
+                {!skipTyping && descText.length < fullDescription.length && (
                   <span className={styles.caret} aria-hidden="true" />
                 )}
-              </label>
-
-              <input
-                className={styles.input}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder=""
-              />
+              </p>
             </div>
-          )}
 
-          <button
-            className={styles.playBtn}
-            type="button"
-            disabled={!canPlay}
-            onClick={handlePlay}
-          >
-            PLAY
-          </button>
-        </div>
+            {/* ✅ SKIP button below text and before play button */}
+            {!skipTyping && descText.length < fullDescription.length && (
+              <button type="button" className={styles.skipBtn} onClick={handleSkip}>
+                SKIP TYPING
+              </button>
+            )}
 
-        {/* RIGHT CHARACTERS */}
-        <div className={styles.charactersArea} aria-label="Characters">
-          <div className={styles.hitboxLayer} aria-hidden="true">
+            {formVisible && (
+              <div className={styles.formBlock}>
+                <label className={styles.label}>
+                  {labelText}
+                  {!skipTyping && labelText.length < fullLabel.length && (
+                    <span className={styles.caret} aria-hidden="true" />
+                  )}
+                </label>
+
+                <input
+                  className={styles.input}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder=""
+                />
+              </div>
+            )}
+
             <button
+              className={styles.playBtn}
               type="button"
-              className={[styles.hitbox, styles.femaleHitbox].join(" ")}
-              onClick={() => selectCharacter("female")}
-              tabIndex={-1}
-            />
-            <button
-              type="button"
-              className={[styles.hitbox, styles.maleHitbox].join(" ")}
-              onClick={() => selectCharacter("male")}
-              tabIndex={-1}
-            />
+              disabled={!canPlay}
+              onClick={handlePlay}
+            >
+              PLAY
+            </button>
           </div>
 
-          <button
-            type="button"
-            onClick={() => selectCharacter("female")}
-            className={[
-              styles.characterBtn,
-              styles.femaleBtn,
-              femaleSelected ? styles.isSelected : "",
-              maleSelected ? styles.isUnselected : "",
-              femaleShouldFloat ? styles.float : "",
-            ].join(" ")}
-            aria-label="Female"
-          >
-            <div className={[styles.imgCrop, femaleSelected ? styles.cropSelected : ""].join(" ")}>
-              <img
-                className={[
-                  styles.characterImg,
-                  styles.femaleImg,
-                  femaleSelected ? styles.imgSelected : "",
-                ].join(" ")}
-                src={femaleSrc}
-                alt="Female character"
+          {/* RIGHT / BOTTOM CHARACTERS */}
+          <div className={styles.charactersArea} aria-label="Characters">
+            <div className={styles.hitboxLayer} aria-hidden="true">
+              <button
+                type="button"
+                className={[styles.hitbox, styles.femaleHitbox].join(" ")}
+                onClick={() => selectCharacter("female")}
+                tabIndex={-1}
+              />
+              <button
+                type="button"
+                className={[styles.hitbox, styles.maleHitbox].join(" ")}
+                onClick={() => selectCharacter("male")}
+                tabIndex={-1}
               />
             </div>
-          </button>
 
-          <button
-            type="button"
-            onClick={() => selectCharacter("male")}
-            className={[
-              styles.characterBtn,
-              styles.maleBtn,
-              maleSelected ? styles.isSelected : "",
-              femaleSelected ? styles.isUnselected : "",
-              maleShouldFloat ? styles.float : "",
-            ].join(" ")}
-            aria-label="Male"
-          >
-            <div className={[styles.imgCrop, maleSelected ? styles.cropSelected : ""].join(" ")}>
-              <img
-                className={[
-                  styles.characterImg,
-                  styles.maleImg,
-                  maleSelected ? styles.imgSelected : "",
-                ].join(" ")}
-                src={maleSrc}
-                alt="Male character"
-              />
-            </div>
-          </button>
-        </div>
+            <button
+              type="button"
+              onClick={() => selectCharacter("female")}
+              className={[
+                styles.characterBtn,
+                styles.femaleBtn,
+                femaleSelected ? styles.isSelected : "",
+                maleSelected ? styles.isUnselected : "",
+                femaleShouldFloat ? styles.float : "",
+              ].join(" ")}
+              aria-label="Female"
+            >
+              <div className={[styles.imgCrop, femaleSelected ? styles.cropSelected : ""].join(" ")}>
+                <img
+                  className={[
+                    styles.characterImg,
+                    styles.femaleImg,
+                    femaleSelected ? styles.imgSelected : "",
+                  ].join(" ")}
+                  src={femaleSrc}
+                  alt="Female character"
+                />
+              </div>
+            </button>
 
-        {/* ✅ Characters background for mobile (at bottom) */}
-        <div className={styles.charactersMobileBG} aria-hidden="true">
-          <img src={femaleSrc} className={styles.mobileCharImg} alt="" />
-          <img src={maleSrc} className={styles.mobileCharImg} alt="" />
+            <button
+              type="button"
+              onClick={() => selectCharacter("male")}
+              className={[
+                styles.characterBtn,
+                styles.maleBtn,
+                maleSelected ? styles.isSelected : "",
+                femaleSelected ? styles.isUnselected : "",
+                maleShouldFloat ? styles.float : "",
+              ].join(" ")}
+              aria-label="Male"
+            >
+              <div className={[styles.imgCrop, maleSelected ? styles.cropSelected : ""].join(" ")}>
+                <img
+                  className={[
+                    styles.characterImg,
+                    styles.maleImg,
+                    maleSelected ? styles.imgSelected : "",
+                  ].join(" ")}
+                  src={maleSrc}
+                  alt="Male character"
+                />
+              </div>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </GameLayout>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useMemo, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import GameLayout from "../../components/Layout/GameLayout";
 import styles from "./WorldSelectorScreen.module.css";
 
 export default function WorldSelectorScreen() {
@@ -19,8 +20,7 @@ export default function WorldSelectorScreen() {
     }
   }, [location.state]);
 
-  const bgUrl = `${process.env.PUBLIC_URL}/backgrounds/firstbg3.png`;
-  const bgStyle = useMemo(() => ({ "--bg": `url(${bgUrl})` }), [bgUrl]);
+  // Background handled by GameLayout (desktop scaling + mobile fluid)
 
   const femaleSrc = `${process.env.PUBLIC_URL}/characters/female.png`;
   const maleSrc = `${process.env.PUBLIC_URL}/characters/male.png`;
@@ -168,97 +168,99 @@ export default function WorldSelectorScreen() {
     comingSoonTyped.length > 0 && comingSoonTyped.length < comingSoonText.length;
 
   return (
-    <div className={styles.screen} style={bgStyle}>
-      <div className={styles.overlay}>
-        <h1 className={styles.title}>HI {nameUpper} SELECT A WORLD TO PLAY IN</h1>
+    <GameLayout backgroundImage="/backgrounds/firstbg3.png">
+      <div className={styles.screen}>
+        <div className={styles.overlay}>
+          <h1 className={styles.title}>HI {nameUpper} SELECT A WORLD TO PLAY IN</h1>
 
-        <div className={styles.worldCard}>
-          {/* LEFT */}
-          <div className={styles.worldLeft}>
-            <div className={styles.worldImageWrap}>
-              <img
-                src={`${process.env.PUBLIC_URL}/worlds/world1.png`}
-                alt="World 1"
-                className={styles.worldImage}
-              />
+          <div className={styles.worldCard}>
+            {/* LEFT */}
+            <div className={styles.worldLeft}>
+              <div className={styles.worldImageWrap}>
+                <img
+                  src={`${process.env.PUBLIC_URL}/worlds/world1.png`}
+                  alt="World 1"
+                  className={styles.worldImage}
+                />
+              </div>
+
+              <div className={styles.worldLabel}>WORLD 1 - DEMOCRACY</div>
             </div>
 
-            <div className={styles.worldLabel}>WORLD 1 - DEMOCRACY</div>
-          </div>
+            {/* RIGHT */}
+            <div className={styles.worldRight}>
+              {/* ✅ SKIP disappears after click */}
+              {!skipUsed && !descDone && (
+                <button
+                  type="button"
+                  className={styles.skipLink}
+                  onClick={finishTypingInstant}
+                  aria-label="Skip typing"
+                >
+                  SKIP
+                </button>
+              )}
 
-          {/* RIGHT */}
-          <div className={styles.worldRight}>
-            {/* ✅ SKIP disappears after click */}
-            {!skipUsed && !descDone && (
+              <p className={styles.worldDesc}>
+                {worldDesc}
+                {!descDone && <span className={styles.caret} aria-hidden="true" />}
+              </p>
+
               <button
                 type="button"
-                className={styles.skipLink}
-                onClick={finishTypingInstant}
-                aria-label="Skip typing"
+                className={styles.playBtn}
+                disabled={!playEnabled}
+                onClick={handlePlayWorld}
               >
-                SKIP
+                PLAY
               </button>
-            )}
-
-            <p className={styles.worldDesc}>
-              {worldDesc}
-              {!descDone && <span className={styles.caret} aria-hidden="true" />}
-            </p>
-
-            <button
-              type="button"
-              className={styles.playBtn}
-              disabled={!playEnabled}
-              onClick={handlePlayWorld}
-            >
-              PLAY
-            </button>
-          </div>
-        </div>
-
-        <div className={styles.comingSoonBar}>
-          <div className={styles.comingSoonInner}>
-            <div className={styles.lockRow}>
-              {[0, 1, 2].map((i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => handleLockClick(i)}
-                  className={[
-                    styles.lockCard,
-                    visibleLocks > i ? styles.lockVisible : "",
-                    shakeIndex === i ? styles.lockShake : "",
-                  ].join(" ")}
-                  aria-label="Locked world"
-                >
-                  <img
-                    src={`${process.env.PUBLIC_URL}/ui/lock.svg`}
-                    alt=""
-                    className={styles.lockIcon}
-                  />
-                </button>
-              ))}
             </div>
-
-            <span className={styles.comingSoonText}>
-              {comingSoonTyped}
-              {showComingSoonCaret && (
-                <span className={styles.caret} aria-hidden="true" />
-              )}
-            </span>
           </div>
-        </div>
 
-        <div
-          className={[
-            styles.playerCrop,
-            player.character === "male" ? styles.playerCropMale : "",
-          ].join(" ")}
-          aria-hidden="true"
-        >
-          <img src={characterSrc} alt="" className={styles.playerImg} />
+          <div className={styles.comingSoonBar}>
+            <div className={styles.comingSoonInner}>
+              <div className={styles.lockRow}>
+                {[0, 1, 2].map((i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => handleLockClick(i)}
+                    className={[
+                      styles.lockCard,
+                      visibleLocks > i ? styles.lockVisible : "",
+                      shakeIndex === i ? styles.lockShake : "",
+                    ].join(" ")}
+                    aria-label="Locked world"
+                  >
+                    <img
+                      src={`${process.env.PUBLIC_URL}/ui/lock.svg`}
+                      alt=""
+                      className={styles.lockIcon}
+                    />
+                  </button>
+                ))}
+              </div>
+
+              <span className={styles.comingSoonText}>
+                {comingSoonTyped}
+                {showComingSoonCaret && (
+                  <span className={styles.caret} aria-hidden="true" />
+                )}
+              </span>
+            </div>
+          </div>
+
+          <div
+            className={[
+              styles.playerCrop,
+              player.character === "male" ? styles.playerCropMale : "",
+            ].join(" ")}
+            aria-hidden="true"
+          >
+            <img src={characterSrc} alt="" className={styles.playerImg} />
+          </div>
         </div>
       </div>
-    </div>
+    </GameLayout>
   );
 }

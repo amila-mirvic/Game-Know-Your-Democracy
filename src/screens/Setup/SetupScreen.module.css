@@ -1,10 +1,7 @@
 .screen {
+  /* This screen is rendered inside GameLayout's viewport/stage */
   width: 100%;
   height: 100%;
-  height: calc(var(--vh, 1vh) * 100);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
 }
@@ -41,7 +38,10 @@
   animation: cardIn 550ms ease-out both;
 }
 
-@keyframes cardIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .descriptionWrap {
   height: auto; /* Allow to fit text */
@@ -88,62 +88,64 @@
 .formBlock { width: 100%; display: flex; flex-direction: column; gap: 4px; }
 .label { color: #fff; font-weight: 700; font-size: 11px; text-transform: uppercase; }
 .input {
-  width: 100%; height: 40px; border-radius: 10px; border: none;
-  padding: 0 12px; font-size: 16px; font-family: "Tomorrow", sans-serif; color: #ca5840;
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  padding: 0 12px;
+  font-size: 16px;
+  font-family: "Tomorrow", sans-serif;
+  color: #ca5840;
   box-sizing: border-box;
   background: #fff;
 }
 
-/* ✅ Character selection improved UX */
+/* ✅ Character selection (mobile/tablet): big characters at the bottom */
 .charactersArea {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 10px;
-}
-
-.characterBtn {
-  position: relative; cursor: pointer;
-  flex: 1; max-width: 110px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 18px; padding: 6px;
-  display: flex; flex-direction: column; align-items: center;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.characterBtn:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3); }
-.characterBtn.isSelected { 
-  background: rgba(255, 255, 255, 0.25); 
-  border-color: #fff; 
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-}
-
-.characterImg { width: 100%; height: 100%; object-fit: contain; }
-
-/* ✅ Characters at bottom background, cropped */
-.charactersMobileBG {
   position: absolute;
-  bottom: -30px;
   left: 0;
   right: 0;
-  height: 30vh;
+  bottom: 0;
+  height: 42vh;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
+  gap: 14px;
+  padding: 0 12px;
+  pointer-events: auto;
+  z-index: 2;
 }
 
-.mobileCharImg {
-  height: 110%;
+.characterBtn {
+  position: relative;
+  cursor: pointer;
+  flex: 1;
+  max-width: 180px;
+  background: transparent;
+  border-radius: 18px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  overflow: visible;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s;
+}
+
+/* subtle hover on devices that support hover */
+@media (hover: hover) {
+  .characterBtn:hover { transform: translateY(-6px) scale(1.02); }
+}
+
+.characterBtn.isSelected { opacity: 1; transform: translateY(-8px) scale(1.04); }
+.characterBtn.isUnselected { opacity: 0.35; }
+
+.characterImg {
   width: auto;
-  opacity: 0.35;
-  margin: 0 -15px;
+  height: 48vh;
+  max-height: 420px;
+  object-fit: contain;
+  display: block;
 }
 
 .playBtn {
@@ -173,30 +175,32 @@
   .descriptionWrap { height: 200px; }
   .description { font-size: 15px; }
   .input { height: 50px; }
-  .characterBtn { max-width: 140px; }
+  .charactersArea { height: 44vh; padding: 0 24px; }
+  .characterBtn { max-width: 240px; }
+  .characterImg { height: 44vh; max-height: 520px; }
   .playBtn { bottom: -32px; height: 64px; font-size: 22px; }
 }
 
 /* Desktop */
 @media (min-width: 1025px) {
-  .overlay { 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    padding: 0; 
+  .overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
   }
 
-  .heroCard { 
-    position: relative; 
-    left: -150px; 
-    top: auto; 
-    width: 680px; 
-    max-width: none; 
-    padding: 50px; 
-    padding-bottom: 110px; 
-    margin-top: 0; 
-    margin-right: 0; 
-    text-align: left; 
+  .heroCard {
+    position: relative;
+    left: -150px;
+    top: auto;
+    width: 680px;
+    max-width: none;
+    padding: 50px;
+    padding-bottom: 110px;
+    margin-top: 0;
+    margin-right: 0;
+    text-align: left;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
   }
 
@@ -204,41 +208,41 @@
   .description { text-align: left; font-size: 17px; line-height: 1.5; }
   .skipBtn { position: absolute; top: 20px; right: 20px; font-size: 14px; padding: 0; margin: 0; background: transparent; border: none; }
   .input { height: 60px; font-size: 20px; border: 2px solid rgba(202, 88, 64, 0.2); }
-  
-  .playBtn { 
-    position: absolute; 
-    left: 50%; 
-    bottom: -40px; 
-    transform: translateX(-50%); 
-    width: 480px; 
-    height: 86px; 
-    font-size: 30px; 
-    margin: 0; 
+
+  .playBtn {
+    position: absolute;
+    left: 50%;
+    bottom: -40px;
+    transform: translateX(-50%);
+    width: 480px;
+    height: 86px;
+    font-size: 30px;
+    margin: 0;
     z-index: 50;
   }
 
-  .charactersArea { 
-    position: absolute; 
-    right: 0; 
+  .charactersArea {
+    position: absolute;
+    right: 0;
     top: 50%;
-    transform: translateY(-50%) translateX(10%);
-    width: 600px; 
-    height: 100vh; 
-    display: block; 
-    margin: 0; 
-    padding: 0; 
+    transform: translateY(-50%);
+    width: 720px;
+    height: 1080px;
+    display: block;
+    margin: 0;
+    padding: 0;
     z-index: 5;
   }
 
-  .characterBtn { 
-    position: absolute; 
-    background: transparent; 
-    border: none; 
-    padding: 0; 
-    max-width: none; 
-    flex: none; 
-    box-shadow: none; 
-    transform: none; 
+  .characterBtn {
+    position: absolute;
+    background: transparent;
+    border: none;
+    padding: 0;
+    max-width: none;
+    flex: none;
+    box-shadow: none;
+    transform: none;
     transition: filter 0.3s, transform 0.3s;
     width: 300px; /* Fixed width for hitbox alignment */
     height: 100%;
@@ -249,33 +253,33 @@
   .characterImg { height: 980px; width: auto; object-fit: contain; }
   .femaleImg { transform: translateX(60px); }
   .maleImg { transform: translateX(-60px); }
-  
-  .characterBtn.isSelected { 
-    border-color: transparent; 
-    transform: scale(1.05); 
-    filter: brightness(1.2) drop-shadow(0 0 30px rgba(255,255,255,0.5)); 
-    box-shadow: none; 
+
+  .characterBtn.isSelected {
+    border-color: transparent;
+    transform: scale(1.05);
+    /* remove glow effect on selection */
+    filter: none;
+    box-shadow: none;
   }
 
-  .hitboxLayer { 
-    display: block; 
-    position: absolute; 
-    inset: 0; 
-    pointer-events: none; 
-    z-index: 999; 
+  .hitboxLayer {
+    display: block;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
   }
 
-  .hitbox { 
-    position: absolute; 
-    cursor: pointer; 
-    pointer-events: auto; 
+  .hitbox {
+    position: absolute;
+    cursor: pointer;
+    pointer-events: auto;
     border: none;
     background: transparent;
   }
 
   .femaleHitbox { left: 0; top: 0; width: 300px; height: 100%; }
   .maleHitbox { left: 300px; top: 0; width: 300px; height: 100%; }
-  .charactersMobileBG { display: none; }
 }
 
 .caret { display: inline-block; width: 8px; height: 14px; margin-left: 4px; vertical-align: -2px; background: rgba(255, 255, 255, 0.75); animation: caretBlink 700ms steps(1) infinite; }
