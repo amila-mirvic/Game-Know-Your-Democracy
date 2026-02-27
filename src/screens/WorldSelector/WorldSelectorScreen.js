@@ -20,8 +20,6 @@ export default function WorldSelectorScreen() {
     }
   }, [location.state]);
 
-  // Background handled by GameLayout (desktop scaling + mobile fluid)
-
   const femaleSrc = `${process.env.PUBLIC_URL}/characters/female.png`;
   const maleSrc = `${process.env.PUBLIC_URL}/characters/male.png`;
   const characterSrc = player.character === "male" ? maleSrc : femaleSrc;
@@ -174,22 +172,8 @@ export default function WorldSelectorScreen() {
           <h1 className={styles.title}>HI {nameUpper} SELECT A WORLD TO PLAY IN</h1>
 
           <div className={styles.worldCard}>
-            {/* LEFT */}
-            <div className={styles.worldLeft}>
-              <div className={styles.worldImageWrap}>
-                <img
-                  src={`${process.env.PUBLIC_URL}/worlds/world1.png`}
-                  alt="World 1"
-                  className={styles.worldImage}
-                />
-              </div>
-
-              <div className={styles.worldLabel}>WORLD 1 - DEMOCRACY</div>
-            </div>
-
-            {/* RIGHT */}
-            <div className={styles.worldRight}>
-              {/* ✅ SKIP disappears after click */}
+            {/* TOP ROW (keeps SKIP above the image on mobile/tablet) */}
+            <div className={styles.cardTopRow}>
               {!skipUsed && !descDone && (
                 <button
                   type="button"
@@ -200,20 +184,38 @@ export default function WorldSelectorScreen() {
                   SKIP
                 </button>
               )}
+            </div>
 
-              <p className={styles.worldDesc}>
-                {worldDesc}
-                {!descDone && <span className={styles.caret} aria-hidden="true" />}
-              </p>
+            <div className={styles.worldCols}>
+              {/* LEFT */}
+              <div className={styles.worldLeft}>
+                <div className={styles.worldImageWrap}>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/worlds/world1.png`}
+                    alt="World 1"
+                    className={styles.worldImage}
+                  />
+                </div>
 
-              <button
-                type="button"
-                className={styles.playBtn}
-                disabled={!playEnabled}
-                onClick={handlePlayWorld}
-              >
-                PLAY
-              </button>
+                <div className={styles.worldLabel}>WORLD 1 - DEMOCRACY</div>
+              </div>
+
+              {/* RIGHT */}
+              <div className={styles.worldRight}>
+                <p className={styles.worldDesc}>
+                  {worldDesc}
+                  {!descDone && <span className={styles.caret} aria-hidden="true" />}
+                </p>
+
+                <button
+                  type="button"
+                  className={styles.playBtn}
+                  disabled={!playEnabled}
+                  onClick={handlePlayWorld}
+                >
+                  PLAY
+                </button>
+              </div>
             </div>
           </div>
 

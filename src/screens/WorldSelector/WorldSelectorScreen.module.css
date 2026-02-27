@@ -1,5 +1,4 @@
 .screen {
-  /* Rendered inside GameLayout */
   width: 100%;
   height: 100%;
   position: relative;
@@ -14,114 +13,57 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 16px 15px;
+  padding: 14px 14px;
   box-sizing: border-box;
 }
 
-/* ✅ Mobile First */
+/* --------------------
+   Title
+-------------------- */
 .title {
   margin: 8px 0 12px;
-  font-size: 18px;
-  letter-spacing: 1px;
-  color: #fff;
+  font-family: "Tomorrow", sans-serif;
   font-weight: 800;
   text-transform: uppercase;
-  font-family: "Tomorrow", sans-serif;
+  letter-spacing: 1px;
+  color: #fff;
+  text-align: center;
   text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
-  text-align: center;
+  font-size: 18px;
+  line-height: 1.1;
   flex-shrink: 0;
 }
 
+/* --------------------
+   Card
+-------------------- */
 .worldCard {
-  position: relative;
-  width: 95%;
-  max-width: 360px;
+  width: min(92vw, 420px);
   border-radius: 20px;
-  background: rgba(202, 88, 64, 0.85);
+  background: rgba(202, 88, 64, 0.86);
   backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.30);
   padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  box-sizing: border-box;
   z-index: 10;
-  min-height: 360px; /* ✅ enough for full description */
-  flex: none;
   overflow: hidden;
-  justify-content: space-between;
 }
 
-.worldLeft {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  flex-shrink: 0;
-}
-
-.worldImageWrap {
+.cardTopRow {
   width: 100%;
-  height: 92px;
-  border-radius: 12px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.worldImage { width: 100%; height: 100%; object-fit: cover; }
-.worldLabel {
-  font-size: 16px;
-  font-weight: 800;
-  color: #fff;
-  font-family: "Tomorrow", sans-serif;
-  text-align: center;
-  margin-top: 2px;
-}
-
-.worldRight {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  flex: 1;
-  min-height: 0;
-  overflow: hidden;
-}
-
-.worldDesc {
-  margin: 0;
-  color: #fff;
-  font-family: "Tomorrow", sans-serif;
-  text-align: center;
-  flex: 1;
-  min-height: 0;
-  overflow-y: visible;
-  padding: 0 5px;
-  font-size: 12px;
-  line-height: 1.35;
-}
-
-.playBtn {
-  width: 100%;
-  height: 56px;
-  border-radius: 10px;
-  background: #ffffff;
-  font-size: 20px;
-  font-weight: 800;
-  color: #ca5840;
-  cursor: pointer;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  border: none;
-  margin-top: 4px;
-  flex-shrink: 0;
+  justify-content: flex-end;
+  align-items: center;
+  height: 26px;
+  margin-bottom: 10px;
 }
 
 .skipLink {
-  position: fixed;
-  top: 10px;
-  right: 15px;
   font-family: "Tomorrow", sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   color: #fff;
-  z-index: 100;
-  opacity: 0.8;
+  opacity: 0.85;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -130,184 +72,298 @@
 }
 .skipLink:hover { opacity: 1; }
 
-/* Coming soon bar */
-.comingSoonBar {
-  width: 100%;
-  padding: 8px;
-  background: rgba(0, 0, 0, 0.35);
-  border-radius: 12px;
+.worldCols {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 5px;
+  gap: 12px;
+}
+
+.worldLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.worldImageWrap {
+  width: 100%;
+  height: 150px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.worldImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.worldLabel {
+  font-family: "Bangers", cursive;
+  letter-spacing: 1px;
+  color: #fff;
+  text-align: center;
+  font-size: 30px;
+}
+
+.worldRight {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.worldDesc {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-family: "Tomorrow", sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  text-align: center;
+  white-space: pre-line;
+}
+
+.playBtn {
+  width: 100%;
+  height: 62px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: none;
+  font-family: "Bangers", cursive;
+  font-size: 42px;
+  letter-spacing: 1px;
+  color: #ca5840;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.playBtn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+/* caret used by typing */
+.caret {
+  display: inline-block;
+  width: 10px;
+  height: 1em;
+  margin-left: 4px;
+  background: rgba(255, 255, 255, 0.85);
+  animation: blink 1s steps(2, start) infinite;
+  vertical-align: -2px;
+}
+
+@keyframes blink {
+  to { visibility: hidden; }
+}
+
+/* --------------------
+   Coming soon bar
+-------------------- */
+.comingSoonBar {
+  width: min(92vw, 520px);
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 14px;
   margin-top: 14px;
   flex-shrink: 0;
 }
 
 .comingSoonInner {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 14px;
-  width: 100%;
+  justify-content: center;
+  gap: 12px;
 }
 
-.lockRow { display: flex; gap: 10px; align-items: center; }
+.lockRow {
+  display: flex;
+  gap: 10px;
+}
 
 .lockCard {
-  width: 40px;
-  height: 32px;
-  border-radius: 6px;
-  background: rgba(202, 88, 64, 1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
   border: none;
-  flex-shrink: 0;
+  background: rgba(202, 88, 64, 0.9);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 220ms ease, transform 220ms ease;
+  cursor: pointer;
 }
-.lockIcon { width: 14px; filter: brightness(0) invert(1); }
+
+.lockVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lockIcon {
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.35));
+}
+
+.lockShake {
+  animation: shake 450ms ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
 
 .comingSoonText {
-  font-size: 12px;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.95);
   font-family: "Tomorrow", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  font-size: 14px;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-.playerCrop { display: none; }
-
-/* Tablet */
-@media (min-width: 768px) {
-  .title { font-size: 22px; margin: 10px 0; }
-  .worldCard { max-width: 450px; padding: 20px; gap: 12px; height: 400px; }
-  .worldImageWrap { height: 140px; }
-  .worldLabel { font-size: 20px; }
-  .worldDesc { font-size: 13px; }
-  .playBtn { height: 50px; font-size: 20px; }
-  .lockCard { width: 60px; height: 48px; }
-  .lockIcon { width: 20px; }
-  .comingSoonText { font-size: 14px; }
+/* --------------------
+   Character crop
+-------------------- */
+.playerCrop {
+  display: none; /* hidden on mobile/tablet */
 }
 
-/* Desktop */
-@media (min-width: 1025px) {
+.playerImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* --------------------
+   Tablet
+-------------------- */
+@media (min-width: 768px) {
   .overlay {
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 60px 80px;
+    padding: 18px 26px;
   }
 
   .title {
-    position: relative;
-    left: 0;
-    top: 0;
-    font-size: 40px;
-    margin: 0 0 26px;
-    text-align: left;
-    z-index: 20;
+    font-size: 26px;
+    margin: 12px 0 16px;
+  }
+
+  .worldCard {
+    width: min(86vw, 860px);
+    padding: 22px;
+    border-radius: 26px;
+  }
+
+  .worldImageWrap { height: 190px; }
+  .worldLabel { font-size: 40px; }
+  .worldDesc { font-size: 16px; }
+
+  .comingSoonBar {
+    width: min(86vw, 860px);
+    padding: 12px 16px;
+    border-radius: 18px;
+  }
+
+  .lockCard {
+    width: 62px;
+    height: 62px;
+    border-radius: 14px;
+  }
+
+  .comingSoonText { font-size: 16px; }
+}
+
+/* --------------------
+   Desktop
+-------------------- */
+@media (min-width: 1025px) {
+  .overlay {
+    padding: 34px 64px;
+  }
+
+  .title {
+    font-size: 54px;
+    margin: 10px 0 22px;
+    letter-spacing: 2px;
     max-width: 1200px;
   }
 
   .worldCard {
-    position: relative;
-    left: 0;
-    top: 0;
-    width: 980px;
-    height: auto;
-    min-height: 520px;
-    max-width: none;
-    display: grid;
-    grid-template-columns: 420px 1fr;
-    gap: 40px;
-    padding: 50px;
-    padding-bottom: 120px;
-    margin-right: 0;
-    text-align: left;
-    flex: none;
-    overflow: visible;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    width: min(1180px, 92vw);
+    padding: 44px;
+    border-radius: 28px;
   }
 
-  .worldLeft { flex-shrink: 0; width: 420px; gap: 15px; }
-  .worldImageWrap { height: 280px; border-radius: 16px; }
-  .worldLabel { font-size: 32px; text-align: left; margin-top: 5px; }
+  .worldCols {
+    flex-direction: row;
+    gap: 46px;
+    align-items: stretch;
+  }
 
-  .worldRight { overflow: visible; justify-content: flex-start; }
+  .worldLeft {
+    flex: 0 0 470px;
+  }
+
+  .worldImageWrap {
+    height: 250px;
+    border-radius: 18px;
+  }
+
+  .worldLabel {
+    font-size: 48px;
+    text-align: left;
+  }
+
+  .worldRight {
+    flex: 1;
+    min-width: 0;
+  }
+
   .worldDesc {
-    font-size: 16px;
+    font-size: 18px;
+    line-height: 1.55;
     text-align: left;
-    overflow: visible;
-    padding-right: 0;
-    line-height: 1.6;
-    max-height: none;
-    overflow-y: visible;
   }
 
+  /* keep button at the bottom without covering text */
   .playBtn {
-    position: absolute;
-    left: 50%;
-    bottom: -40px;
-    transform: translateX(-50%);
-    width: 420px;
-    height: 86px;
-    font-size: 30px;
-    margin: 0;
-    z-index: 50;
+    width: min(520px, 100%);
+    height: 72px;
+    font-size: 54px;
+    margin-top: auto;
+    align-self: flex-start;
   }
-
-  .skipLink {
-    position: absolute;
-    top: 40px;
-    right: 40px;
-    font-size: 20px;
-    z-index: 100;
-    text-shadow: none;
-    opacity: 0.8;
-  }
-  .skipLink:hover { opacity: 1; }
 
   .comingSoonBar {
-    position: relative;
-    width: 980px;
-    max-width: none;
-    height: 140px;
-    flex-direction: row;
-    padding: 0 40px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    margin-top: 22px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: min(1180px, 92vw);
+    padding: 16px 20px;
   }
 
-  .comingSoonInner {
-    padding: 0;
-    width: 100%;
-    gap: 25px;
-    justify-content: flex-start;
+  .comingSoonText {
+    font-size: 18px;
   }
 
-  .lockCard { width: 120px; height: 100px; border-radius: 14px; }
-  .lockIcon { width: 34px; }
-  .comingSoonText { font-size: 20px; }
-
+  /* show character on desktop only */
   .playerCrop {
     display: block;
     position: absolute;
-    right: 0;
-    bottom: -40px;
-    height: 105vh;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 5;
-    transform: translateX(6%);
+    right: 2vw;
+    bottom: -2vh;
+    width: 360px;
+    max-width: 28vw;
+    z-index: 2;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.35));
   }
-  .playerImg { height: 100%; display: block; width: auto; object-fit: contain; }
-}
 
-.caret { display: inline-block; width: 8px; height: 14px; margin-left: 4px; vertical-align: -2px; background: rgba(0, 0, 0, 0.35); animation: caretBlink 700ms steps(1) infinite; }
-@keyframes caretBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
-@keyframes lockShake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
-.lockShake { animation: lockShake 420ms ease; }
+  .playerCropMale {
+    width: 380px;
+    max-width: 30vw;
+  }
+}
