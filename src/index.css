@@ -1,11 +1,3 @@
-html,
-body,
-#root {
-  height: 100%;
-  width: 100%;
-  overflow: hidden; /* ✅ prevent global scrollbars; screens handle internal scrolling if needed */
-}
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
